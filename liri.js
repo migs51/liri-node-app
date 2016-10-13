@@ -30,20 +30,23 @@ function getData() {
 
 
 //===========Spotify==============//
-/*var spotify = require('spotify');
-var S = new spotify();
+var spotify = require('spotify');
 
-var params = {
-	q: 'the dance'
+/*spotify.get({query, hollaback)*/
 
-}
+var spotify = require('spotify');
+ 
+spotify.get({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+ 
+   console.log(data);
+});
 
-S.get('search/song', params, spotifyData);
 
-function spotifyData(err, data, response){
-	console.log(data);
-}
-*/
+
 
 
 
@@ -67,7 +70,7 @@ switch(command){
 		//do something
 		getData();
 		break;
-	case "spotify-this-song":
+	case "spotify-this-song '<song name here>'":
 		//do something
 		break;
 	case "movie-this":
