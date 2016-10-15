@@ -1,6 +1,6 @@
-var request = require('request');
-var fs = require('fs');
-var inquirer = require('inquirer');
+
+
+
 
 
 //============Twitter==================//
@@ -63,11 +63,70 @@ function getSong(){
 	});
 }
 
+//======================= OMDB ===============================//
+
+var request = require('request');
+
+function getMovie(){
+	request('http://www.omdbapi.com/?t=' + command2, function (error, response, body) {
+
+		if (!error && response.statusCode == 200) {
+
+			console.log("The movie's rating is: " + JSON.parse(body)["imdbRating"])
 
 
 
+		}
+	});
+}
 
-// node argument //
+//========================fs============================//
+
+var fs = require('fs');
+
+function doIt(){
+fs.readFile("random.txt", "utf8", function(err,data){
+	var output = data.split();
+	for (var i=0; i<output.length; i++){
+		console.log(output[i]);
+	}
+
+			function getSong(){
+			spotify.search({ type: 'track', query: output[i] }, function(err, data) {
+			    if ( err ) {
+			        console.log('Error occurred: ' + err);
+			        return;
+			    }
+			 
+			   console.log(data.tracks.items);
+
+			   var items = data.tracks.items;
+
+			   for(i=0; i < items.length; i++){
+			   	console.log(items[i].album.name);
+			   }
+
+			   for(i=0; i < items.length; i++){
+			   	console.log(items[i].name);
+			   }
+
+			    for(i=0; i < items.length; i++){
+			   	console.log(items[i].artists);
+			   }
+
+			    for(i=0; i < items.length; i++){
+			   	console.log(items[i].preview_url);
+			   }
+
+			});
+		}
+		getSong();
+});
+}
+
+
+
+// node arguments //
 
 
 
@@ -97,10 +156,10 @@ switch(command1 + command2){
 		getSong();
 		break;
 	case "movie-this":
-		//do something
+		getMovie();
 		break;
 	case "do-what-it-says":
-		//do something
+		doIt();
 		break;
 	default:
 		console.log("invalid value");
