@@ -32,19 +32,36 @@ function getData() {
 //===========Spotify==============//
 var spotify = require('spotify');
 
-/*spotify.get({query, hollaback)*/
 
-var spotify = require('spotify');
- 
-spotify.get({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
-    }
- 
-   console.log(data);
-});
+function getSong(){
+	spotify.search({ type: 'track', query: command2 }, function(err, data) {
+	    if ( err ) {
+	        console.log('Error occurred: ' + err);
+	        return;
+	    }
+	 
+	   console.log(data.tracks.items);
 
+	   var items = data.tracks.items;
+
+	   for(i=0; i < items.length; i++){
+	   	console.log(items[i].album.name);
+	   }
+
+	   for(i=0; i < items.length; i++){
+	   	console.log(items[i].name);
+	   }
+
+	    for(i=0; i < items.length; i++){
+	   	console.log(items[i].artists);
+	   }
+
+	    for(i=0; i < items.length; i++){
+	   	console.log(items[i].preview_url);
+	   }
+
+	});
+}
 
 
 
@@ -52,26 +69,32 @@ spotify.get({ type: 'track', query: 'dancing in the moonlight' }, function(err, 
 
 // node argument //
 
+
+
+var command1 = process.argv[2];
+
+var command2 = "";
 var nodeArg = process.argv; 
 
-var command = "";
-
-for (var i=2; i<nodeArg.length; i++){
-	command = nodeArg[i];
+for (var i=3; i<nodeArg.length; i++){
+	command2 = nodeArg[i];
+	
 }
 
-console.log(command);
+
+
+console.log(command2);
 
 
 //======Switch Expression=======//
 
-switch(command){	
+switch(command1 + command2){	
 	case "my-tweets": 
 		//do something
 		getData();
 		break;
-	case "spotify-this-song '<song name here>'":
-		//do something
+	case "spotify-this-song" + command2:
+		getSong();
 		break;
 	case "movie-this":
 		//do something
