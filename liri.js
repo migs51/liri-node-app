@@ -66,16 +66,20 @@ function getSong(){
 //======================= OMDB ===============================//
 
 var request = require('request');
+var queryUrl = 'http://www.omdbapi.com/?t=' + command2 +'&y=&plot=short&r=json';
 
 function getMovie(){
-	request('http://www.omdbapi.com/?t=' + command2, function (error, response, body) {
-
-		if (!error && response.statusCode == 200) {
-
-			console.log("The movie's rating is: " + JSON.parse(body)["imdbRating"])
-
-
-
+	request(queryUrl, function(error, response, body){
+		if(!error && response.statusCode == 200){
+			console.log(JSON.parse(body)["Released"])
+			console.log(JSON.parse(body)["Title"])
+			console.log(JSON.parse(body)["imdbRating"])
+			console.log(JSON.parse(body)["Country"])
+			console.log(JSON.parse(body)["Language"])
+			console.log(JSON.parse(body)["Plot"])
+			console.log(JSON.parse(body)["Actors"])
+			console.log(JSON.parse(body)["Released"])
+			console.log(JSON.parse(body)["Released"])
 		}
 	});
 }
